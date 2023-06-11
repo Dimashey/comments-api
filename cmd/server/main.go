@@ -28,7 +28,15 @@ func Run() error {
 
 	commentService := comment.NewService(db)
 
-	fmt.Println(commentService.GetComment(context.Background(), "e0e2ae8f-4af4-44c7-a7fa-798d6dc6e394"))
+	commentService.PostComment(
+		context.Background(),
+		comment.Comment{
+			ID:     "e0e2ae8f-4af4-44c7-a7fa-798d6dc6e394",
+			Slug:   "manual-test",
+			Author: "Dmytro",
+			Body:   "Hello World",
+		},
+	)
 	return nil
 }
 
