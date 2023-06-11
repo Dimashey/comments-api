@@ -1,11 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/Dimashey/comments-api/internal/comment"
 	"github.com/Dimashey/comments-api/internal/db"
+	transportHttp "github.com/Dimashey/comments-api/transport/http"
 )
 
 // Run - is going to be responsible
@@ -27,16 +27,12 @@ func Run() error {
 	}
 
 	commentService := comment.NewService(db)
+	httpHandler := transportHttp.NewHandler(commentService)
 
-	commentService.PostComment(
-		context.Background(),
-		comment.Comment{
-			ID:     "e0e2ae8f-4af4-44c7-a7fa-798d6dc6e394",
-			Slug:   "manual-test",
-			Author: "Dmytro",
-			Body:   "Hello World",
-		},
-	)
+	if err := httpHandler.Serve(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
