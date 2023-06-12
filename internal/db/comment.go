@@ -54,6 +54,8 @@ func (d *Database) PostComment(
 ) (comment.Comment, error) {
 	cmt.ID = uuid.NewV4().String()
 
+	fmt.Println("start creating a comment")
+
 	postRow := CommentRow{
 		ID:     cmt.ID,
 		Slug:   sql.NullString{String: cmt.Slug, Valid: true},
