@@ -24,6 +24,8 @@ func NewHandler(service CommentService) *Handler {
 
 	handler.Router = mux.NewRouter()
 	handler.mapRoutes()
+	handler.Router.Use(JSONMiddleware)
+	handler.Router.Use(LoggingMiddleware)
 
 	handler.Server = &http.Server{
 		Addr:    "0.0.0.0:8080",
