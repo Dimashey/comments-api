@@ -17,7 +17,7 @@ services:
   
   api:
     build: .
-    container_name: "comments-api"
+    container_name: "comments-rest-api"
     environment:
       DB_USERNAME: "postgres"
       DB_PASSWORD: "postgres"
